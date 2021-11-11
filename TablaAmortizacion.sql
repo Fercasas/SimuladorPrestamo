@@ -3,13 +3,13 @@ SET NOCOUNT ON
 /*Parametros iniciales*/
 DECLARE 
 --Importe o valor del prestamo
-@Importe    MONEY = 10000000
+@Importe    MONEY = 100000000
 DECLARE 
 --Plazo en meses
-@PLazo    INT = 12
+@PLazo    INT = 180
 DECLARE 
 --Tasa Efectiva Anual (porcentaje)
-@TasaAnual    FLOAT = 15.36
+@TasaAnual    FLOAT = 15.48
 DECLARE 
 --Valor mensual por productos externos como seguros
 @Externos    MONEY = 0
@@ -71,7 +71,7 @@ BEGIN
 		SELECT @Intereses = CAST(ROUND(@Importe * @Int, 0) AS MONEY)
 		SELECT @PpalPte = CAST(ROUND(@Importe - @Principal, 0) AS MONEY)
 
-		SET @Mensaje = '>>> Generar tabla de amortizaci�n'
+		SET @Mensaje = '>>> Generar tabla de amortización'
 		PRINT @Mensaje
 
 		;WITH Amortizacion
@@ -116,7 +116,7 @@ BEGIN
 				  , Intereses
 				  , Externos
 				  , PpalPte
-			 FROM Amortizacion AS a
+			 FROM Amortizacion AS A OPTION(MAXRECURSION 500)
 	END TRY
 	BEGIN CATCH
 		SET @MensajeError = CONCAT('ERROR', ' [', COALESCE(@Mensaje, ''), ']: ', COALESCE(ERROR_MESSAGE(), ''))
