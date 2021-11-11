@@ -2,13 +2,13 @@ SET NOCOUNT ON
 
 /*Parametros iniciales*/
 DECLARE 
---Importe del prestamo
+--Importe o valor del prestamo
 @Importe    MONEY = 10000000
 DECLARE 
 --Plazo en meses
 @PLazo    INT = 12
 DECLARE 
---Tasa Efectiva Anual
+--Tasa Efectiva Anual (porcentaje)
 @TasaAnual    FLOAT = 15.36
 DECLARE 
 --Valor mensual por productos externos como seguros
@@ -71,7 +71,7 @@ BEGIN
 		SELECT @Intereses = CAST(ROUND(@Importe * @Int, 0) AS MONEY)
 		SELECT @PpalPte = CAST(ROUND(@Importe - @Principal, 0) AS MONEY)
 
-		SET @Mensaje = '>>> Generar tabla de amortización'
+		SET @Mensaje = '>>> Generar tabla de amortizaciï¿½n'
 		PRINT @Mensaje
 
 		;WITH Amortizacion
